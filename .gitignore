@@ -1,0 +1,8 @@
+*pyc
+*.DS_Store
+*~
+test_*
+*.log
+log/
+settings.py
+data/
