@@ -10,13 +10,16 @@
 > * api服务模块 （方面外部系统调用）
 
 ## 项目依赖(本人使用mac和ubuntu)
-
-1.安装sqlite数据库(一般系统内置):
-```python
+1. 安装sqlite数据库(一般系统内置):
+```
 apt-get install sqlite3
 ```
-2.安装requirements.txt库:
-```python
+2. 安装redis服务:
+```
+apt-get install redis-server
+```
+3. 安装requirements.txt库:
+```
 pip install -r requirements.txt
 ```
 
@@ -44,6 +47,9 @@ sqlalchemy下的DB_CONNECT_STRING参考[支持数据库](http://docs.sqlalchemy.
 ## 如何使用
 将项目目录clone到当前文件夹 -> 切换工程目录 -> 运行脚本
 <br/>
+```
+python db.py  # 初始化db
+```
 比较推荐使用 supervisor 启动这些进程，这样可靠性比较高啦~
 ```
 python crawler.py  # 爬虫脚本
@@ -53,6 +59,15 @@ python server.py  # api服务
 ```
 所有的模块都有系统的日志产生
 目前系统默认的日志路径是在 项目 data/log 下面
+
+
+## 其他说明
+由于校验代理ip模块是比较耗时，所以采用了多进程处理！
+<br/>
+校验模块分两个，一个验证db数据，一个验证新抓取的数据。
+<br/>
+验证新抓取的采用了redis的阻塞式队列，保证爬虫模块尽量不会被阻塞！
+
 
 ## API 使用方法
 

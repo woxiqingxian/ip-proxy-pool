@@ -200,13 +200,13 @@ if __name__ == '__main__':
     sql_handler.init_db()
     # proxy = {'ip': '192.168.1.1', 'port': 80, 'type': 0, 'protocol': 0, 'country': u'中国', 'area': u'广州', 'speed': 1123, 'types': ''}
     # sql_handler.insert(proxy)
-    result = sql_handler.select()
-    print len(result)
-    ip_port_set = set()
-    for i in result:
-        print "%s:%s %s %s" % (i.ip, i.port, i.create_time, i.update_time)
-        ip_port_set.add("%s:%s" % (i.ip, i.port))
-    print len(ip_port_set)
+    # result = sql_handler.select()
+    # print len(result)
+    # ip_port_set = set()
+    # for i in result:
+    #     print "%s:%s %s %s" % (i.ip, i.port, i.create_time, i.update_time)
+    #     ip_port_set.add("%s:%s" % (i.ip, i.port))
+    # print len(ip_port_set)
         # print type(i.ip), i.ip
         # print type(i.port), i.port
         # print type(i.speed), i.speed
