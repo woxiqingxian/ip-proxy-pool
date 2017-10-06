@@ -61,7 +61,7 @@ python server.py  # api服务
 目前系统默认的日志路径是在 项目 data/log 下面
 
 
-## 其他说明
+## 补充说明
 由于校验代理ip模块是比较耗时，所以采用了多进程处理！
 <br/>
 校验模块分两个，一个验证db数据，一个验证新抓取的数据。
@@ -108,15 +108,16 @@ GET /delete
 
 
 
-### TODO
+## TODO
 
 - [x] 基本服务接口和项目逻辑
 - [ ] 改进数据库，使用redis服务
 - [ ] 评分模块（根据调用次数和服务次数定期评分）
 
-------
+## 特别说明
+- 本项目 爬虫文本分析\数据存储模块 借鉴[IPProxyPool](https://github.com/qiyeboy/IPProxyPool)项目
+
+## 最后
 欢迎star或fork一起改进本项目！
 
-作者 [@woxiqingxian](https://github.com/woxiqingxian)
-<br/>
-2017年10月06日
+作者 [@woxiqingxian](https://github.com/woxiqingxian) 2017年10月06日
