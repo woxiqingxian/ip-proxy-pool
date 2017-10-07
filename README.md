@@ -1,5 +1,10 @@
 # 欢迎使用ip-proxy-pool
 ------
+## api在线调用测试
+http://ipproxypool.ingrok.wauks.cn/
+<br/>
+使用了ngrok服务,个人用的!请勿压测啊！
+
 ## ip-proxy-pool是什么以及为什么产生
 该项目是一个ip代理池，可以获取有效的代理ip。
 <br/>
@@ -36,7 +41,7 @@ pip install -r requirements.txt
         # sqlite 配置
         # "db_connect_type": "sqlite",  # sqlite
         # "db_connect_string": 'sqlite:///' + BASE_DIR + '/data/proxy.db',
-        # "other_config": {'check_same_thread': False, "echo": False },
+        # "other_config": {"connect_args":{'check_same_thread': False}, "echo": False },
 
     }
 ```
@@ -48,7 +53,7 @@ sqlalchemy下的DB_CONNECT_STRING参考[支持数据库](http://docs.sqlalchemy.
 ```
 python db.py  # 初始化db
 ```
-比较推荐使用 supervisor 启动这些进程，这样可靠性比较高啦~
+比较推荐使用 supervisor 启动这些进程，这样可靠性比较高啦，工程里面有supervisor.conf可以参考！
 ```
 python crawler.py  # 爬虫脚本
 python validator.py new  # 抓取到的ip校验
