@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 import os
 
+# server配置
 API_PORT = 5000
 
 # 默认给抓取的ip分配10分,每次连接失败,减一分,直到分数全部扣完从数据库中删除
 DEFAULT_SCORE = 10
 
-## 代理校验配置
+# 代理校验配置~~~~~~
 # 代理校验timeout
 PROXY_TEST_TIME_OUT_SECORDS = 2
 # 检验代理url
@@ -19,15 +20,24 @@ PROXY_TEST_PROCESS_NUM = 25
 NEW_VALIDATOR_QUEUE = "new_validator_queue"
 
 BASE_DIR = os.path.dirname(__file__)
+
+# Log 配置
 BASE_LOG_DIR = BASE_DIR + '/log'
+LOG_LEVEL_INFO = 0
+LOG_LEVEL_WARNING = 1
+LOG_LEVEL_ERROR = 2
+LOG_STATUS_BEGIN = 1
+LOG_STATUS_END = 2
+LOG_STATUS_SUCCESS =3
+LOG_STATUS_FAIL = 4
 
 DB_CONFIG = {
-    # "db_connect_type": "sqlite",  # mysql\sqlite
-    # "db_connect_string": 'sqlite:///' + BASE_DIR + '/data/proxy.db',
-    # "other_config": {'check_same_thread': False, "echo": False },
-    "db_connect_type": "mysql",  # mysql\sqlite
-    "db_connect_string": 'mysql+mysqldb://root:mysql@127.0.0.1:3306/data?charset=utf8',
-    "other_config": {"echo": False },
+    "db_connect_type": "sqlite",  # mysql\sqlite
+    "db_connect_string": 'sqlite:///' + BASE_DIR + '/data/proxy.db',
+    "other_config": {'check_same_thread': False, "echo": False },
+    # "db_connect_type": "mysql",  # mysql\sqlite
+    # "db_connect_string": 'mysql+mysqldb://root:mysql@127.0.0.1:3306/data?charset=utf8',
+    # "other_config": {"echo": False },
 }
 
 REDIS_CONFIG = {

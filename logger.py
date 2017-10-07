@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
 """ Logger """
 
 import settings
@@ -9,15 +8,7 @@ import os
 from datetime import datetime, timedelta
 import logging
 
-LOGGERS = {}
-
-
-def close_log_fs(logger_name):
-    # 先移出全局字典
-    log = LOGGERS.pop(logger_name, None)
-    if log:
-        for handler in log.handlers:
-            handler.close()
+LOGGERS_INFO = {}
 
 
 class Loggers(object):
@@ -50,8 +41,8 @@ class Loggers(object):
 
         key = "%s_%s.log" % (self.log_name, _date)
 
-        if key in LOGGERS:
-            return LOGGERS[key]
+        if key in LOGGERS_INFO:
+            return LOGGERS_INFO[key]
         else:
             _logger = logging.getLogger(key)
             _logger.setLevel(logging.INFO)
@@ -63,14 +54,16 @@ class Loggers(object):
                 formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s')
                 fh.setFormatter(formatter)
                 _logger.addHandler(fh)
-                LOGGERS[key] = _logger
+                LOGGERS_INFO[key] = _logger
 
-            # 删除昨日在LOGGERS 中的对象
+            # 删除昨日在LOGGERS_INFO中的对象
             yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y%m%d")
             _key = "%s_%s.log" % (self.log_name, yesterday)
-            if _key in LOGGERS:
-                close_log_fs(_key)
-
+            if _key in LOGGERS_INFO:
+                log = LOGGERS_INFO.pop(_key, None)
+                if log:
+                    for handler in log.handlers:
+                        handler.close()
             return _logger
 
     def write(self, cmd, data=None, status=0, level=0, exc_info=None):

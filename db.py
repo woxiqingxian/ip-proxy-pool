@@ -122,11 +122,11 @@ class SqlHandler(ISqlHandler):
             query = self.session.query(Proxy)
             for condition in conditions:
                 query = query.filter(condition)
-            deleteNum = query.delete()
+            delete_num = query.delete()
             self.session.commit()
         else:
-            deleteNum = 0
-        return {'deleteNum', deleteNum}
+            delete_num = 0
+        return {'delete_num', delete_num}
 
     def update(self, conditions=None, value=None):
         '''
@@ -149,11 +149,11 @@ class SqlHandler(ISqlHandler):
             for key in list(value.keys()):
                 if self.params.get(key, None):
                     updatevalue[self.params.get(key, None)] = value.get(key)
-            updateNum = query.update(updatevalue)
+            update_num = query.update(updatevalue)
             self.session.commit()
         else:
-            updateNum = 0
-        return {'updateNum': updateNum}
+            update_num = 0
+        return {'update_num': update_num}
 
     def select(self, count=None, conditions=None):
         '''
@@ -178,7 +178,6 @@ class SqlHandler(ISqlHandler):
             for condition in conditions:
                 query = query.filter(condition)
         if count:
-            # return query.order_by(Proxy.score.desc(), Proxy.speed, Proxy.use_times).limit(count).all()
             return query.order_by(Proxy.use_times, Proxy.score.desc(), Proxy.speed).limit(count).all()
         else:
             return query.order_by(Proxy.use_times, Proxy.score.desc(), Proxy.speed).all()

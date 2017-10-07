@@ -14,6 +14,8 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 from multiprocessing import Process
 from logger import Loggers
+import requests
+import time
 import sys
 import ujson as json
 import copy
@@ -23,13 +25,80 @@ import db
 db.init()
 
 
+def _detect_proxy(proxy_ip, proxy_port):
+    """ 检测代理
+    """
+    def _request_test(test_url):
+        try:
+            _start = time.time()
+            proxies = {
+                "http": "http://%s:%s" % (proxy_ip, proxy_port),
+                "https": "https://%s:%s" % (proxy_ip, proxy_port),
+            }
+            r = requests.get(
+                url=test_url,
+                headers=utils.get_html_header(),
+                timeout=settings.PROXY_TEST_TIME_OUT_SECORDS,
+                proxies=proxies
+            )
+            if r.status_code == 200:
+                speed = int((time.time() - _start)*1000)
+                resp_json = r.json()
+                headers = resp_json['headers']
+                ip = resp_json['origin']
+                proxy_connection = headers.get('Proxy-Connection', None)
+                if ',' in ip:
+                    types = 3  # 透明
+                elif proxy_connection:
+                    types = 2  # 普匿
+                else:
+                    types = 1  # 高匿
+                return True, types, speed
+        except Exception as e:
+            # print e
+            pass
+        return False, 0, 0
+
+    protocol = 0
+    http_test_url = settings.HTTP_TEST_URL
+    http_result, http_types, http_speed = _request_test(http_test_url)
+    protocol += 1 if http_result else 0
+
+    https_test_url = settings.HTTPS_TEST_URL
+    https_result, https_types, https_speed = _request_test(https_test_url)
+    protocol += 2 if https_result else 0
+
+    types = 0
+    speed = 0
+    if protocol == 1:
+        types = http_types
+        speed = http_speed
+    elif protocol == 2:
+        types = https_types
+        speed = https_speed
+    elif protocol == 3:
+        types = http_types
+        speed = http_speed
+    else:
+        return None
+
+    proxy_info = {
+        "ip": proxy_ip,
+        "port": proxy_port,
+        "protocol": protocol,
+        "types": types,
+        "speed": speed,
+    }
+    return proxy_info
+
+
 def _validator_proxy(proxy_list, _type):
     from db import SqlHandler
     sql_handler = SqlHandler()  # 进程自己生成！
     for proxy in proxy_list:
         ip = proxy['ip']
         port = proxy['port']
-        proxy_info = utils.detect_proxy(ip, port)
+        proxy_info = _detect_proxy(ip, port)
         if proxy_info and _type == "db":
             # 更新
             sql_handler.update(
