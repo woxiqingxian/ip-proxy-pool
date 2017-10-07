@@ -34,7 +34,7 @@ LOG_STATUS_FAIL = 4
 DB_CONFIG = {
     "db_connect_type": "sqlite",  # mysql\sqlite
     "db_connect_string": 'sqlite:///' + BASE_DIR + '/data/proxy.db',
-    "other_config": {'check_same_thread': False, "echo": False },
+    "other_config": {"connect_args":{'check_same_thread': False}, "echo": False },
     # "db_connect_type": "mysql",  # mysql\sqlite
     # "db_connect_string": 'mysql+mysqldb://root:mysql@127.0.0.1:3306/data?charset=utf8',
     # "other_config": {"echo": False },
