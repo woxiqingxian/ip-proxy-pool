@@ -35,7 +35,7 @@ class select(object):
     def GET(self):
         inputs = web.input()
         count = int(inputs.pop('count', 1))
-        count = count if count > 10 else 1
+        count = count if count <= 10 else 1
         result = list(db.sql_handler.select(count, inputs))
         _resp_list = []
         for i in result:
