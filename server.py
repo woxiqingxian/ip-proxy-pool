@@ -10,7 +10,7 @@ db.init()
 urls = (
     '/', 'info',
     '/select', 'select',
-    # '/get_all', 'select_all',
+    # '/select_all', 'select_all',
     # '/delete', 'delete'
 )
 
