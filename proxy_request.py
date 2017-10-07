@@ -12,7 +12,7 @@ import requests
 import time
 
 
-global_proxy_request_url = 'http://127.0.0.1:5000'  # 计数
+global_proxy_request_url = 'http://127.0.0.1:5000/select'  # 计数
 global_proxy_time_out_seconds = 60*3  # 代理使用时长
 global_proxy_request_sleep_time = 1500  # 毫秒(获取新代理需要时间)
 global_request_sleep_time = 10  # 毫秒(每次发起请求需要休眠时间)

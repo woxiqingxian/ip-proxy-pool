@@ -3,7 +3,7 @@
 ## api在线调用测试
 http://ipproxypool.ingrok.wauks.cn/
 <br/>
-使用了ngrok服务,个人用的!请勿压测啊！
+api服务放在家里的机器上，使用了ngrok进行内网穿透访问，个人使用，手下留情，请勿压测！
 
 ## ip-proxy-pool是什么以及为什么产生
 该项目是一个ip代理池，可以获取有效的代理ip。
