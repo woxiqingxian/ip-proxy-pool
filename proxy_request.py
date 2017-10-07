@@ -100,7 +100,7 @@ class ApiRequest(object):
                         "http": "http://" + _proxy_ip,
                         "https": "https://" + _proxy_ip,
                     }
-                headers = utils.get_html_header(),
+                headers = utils.get_html_header()
                 if method.upper() == "GET":
                     resp = requests.get(
                         url, params=params,
