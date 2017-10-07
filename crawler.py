@@ -90,26 +90,26 @@ class HtmlParser(object):
             proxy['port'] = new_port
         return proxy_list
 
-    def _proxy_listPraser(self):
-        proxy_list = []
-        pattern = re.compile(self.parser['pattern'])
-        matchs = pattern.findall(self.html_content)
-        if not matchs:
-            return proxy_list
+    # def _proxy_listPraser(self):
+    #     proxy_list = []
+    #     pattern = re.compile(self.parser['pattern'])
+    #     matchs = pattern.findall(self.html_content)
+    #     if not matchs:
+    #         return proxy_list
 
-        for match in matchs:
-            try:
-                ip_port = base64.b64decode(match.replace("Proxy('", "").replace("')", ""))
-                ip = ip_port.split(':')[0]
-                port = ip_port.split(':')[1]
-            except Exception:
-                continue
-            proxy = {
-                'ip': ip,
-                'port': port,
-            }
-            proxy_list.append(proxy)
-        return proxy_list
+    #     for match in matchs:
+    #         try:
+    #             ip_port = base64.b64decode(match.replace("Proxy('", "").replace("')", ""))
+    #             ip = ip_port.split(':')[0]
+    #             port = ip_port.split(':')[1]
+    #         except Exception:
+    #             continue
+    #         proxy = {
+    #             'ip': ip,
+    #             'port': port,
+    #         }
+    #         proxy_list.append(proxy)
+    #     return proxy_list
 
 
 class Crawler(object):

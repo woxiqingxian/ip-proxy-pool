@@ -10,7 +10,7 @@ db.init()
 urls = (
     '/', 'select',
     '/all', 'select_all',
-    '/delete', 'delete'
+    # '/delete', 'delete'
 )
 
 
@@ -52,12 +52,12 @@ class select_all(object):
         return json_result
 
 
-class delete(object):
-    params = {}
-    def GET(self):
-        inputs = web.input()
-        json_result = json.dumps(db.sql_handler.delete(inputs))
-        return json_result
+# class delete(object):
+#     params = {}
+#     def GET(self):
+#         inputs = web.input()
+#         json_result = json.dumps(db.sql_handler.delete(inputs))
+#         return json_result
 
 
 if __name__ == '__main__':

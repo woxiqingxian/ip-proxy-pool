@@ -11,6 +11,7 @@ DEFAULT_SCORE = 10
 # 代理校验timeout
 PROXY_TEST_TIME_OUT_SECORDS = 2
 # 检验代理url
+# 以后可以看看能不能使用 http://ipaddress.com/
 HTTP_TEST_URL = "http://httpbin.org/get"
 HTTPS_TEST_URL = "https://httpbin.org/get"
 # 代理校验并发量
@@ -68,15 +69,15 @@ CRAWLER_WEB_LIST = [
             'position': {'ip': './td[1]', 'port': './td[2]'}
         }
     },
-    {
-        'url_list': ['https://proxy-list.org/english/index.php?p=%s' % n for n in range(1, 10)],
-        "parser_config": {
-            'position': {'ip': 0, 'port': -1},
-            'type': 'module',
-            'moduleName': 'proxy_listPraser',
-            'pattern': 'Proxy\(.+\)',
-        }
-    },
+    # {
+    #     'url_list': ['https://proxy-list.org/english/index.php?p=%s' % n for n in range(1, 10)],
+    #     "parser_config": {
+    #         'position': {'ip': 0, 'port': -1},
+    #         'type': 'module',
+    #         'moduleName': 'proxy_listPraser',
+    #         'pattern': 'Proxy\(.+\)',
+    #     }
+    # },
     {
         'url_list': ['http://incloak.com/proxy-list/%s#list' % n for n in
                  ([''] + ['?start=%s' % (64 * m) for m in range(1, 10)])],
@@ -131,7 +132,7 @@ CRAWLER_WEB_LIST = [
         'url_list': ['http://www.cnproxy.com/proxy%s.html' % i for i in range(1, 11)],
         "parser_config": {
             'type': 'module',
-            'moduleName': 'CnproxyPraser',
+            'moduleName': '_cnproxy_praser',
             'pattern': r'<tr><td>(\d+\.\d+\.\d+\.\d+)<SCRIPT type=text/javascript>document.write\(\"\:\"(.+)\)</SCRIPT></td><td>(HTTP|SOCKS4)\s*',
             'position': {'ip': 0, 'port': 1}
         }

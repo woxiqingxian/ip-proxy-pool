@@ -7,6 +7,7 @@
 """
 from datetime import datetime
 from logger import Loggers
+import utils
 import requests
 import time
 
@@ -97,12 +98,17 @@ class ApiRequest(object):
                     _proxy_ip = self._get_proxy_ip()
                     proxies = {
                         "http": "http://" + _proxy_ip,
-                        "https": "http://"+ _proxy_ip,
+                        "https": "https://" + _proxy_ip,
                     }
+                headers = utils.get_html_header(),
                 if method.upper() == "GET":
-                    resp = requests.get(url, params=params, timeout=timeout, proxies=proxies)
+                    resp = requests.get(
+                        url, params=params,
+                        headers=headers, timeout=timeout, proxies=proxies)
                 else:
-                    resp = requests.post(url, params=params, timeout=timeout, proxies=proxies)
+                    resp = requests.post(
+                        url, params=params,
+                        headers=headers, timeout=timeout, proxies=proxies)
                 if resp.status_code != 200:
                     raise Exception("status_code != 200")
                 break

@@ -1,7 +1,7 @@
 # 欢迎使用ip-proxy-pool
 ------
 ## ip-proxy-pool是什么以及为什么产生
-该项目是一个ip代理池，可以通过结果获取有效的代理ip。
+该项目是一个ip代理池，可以获取有效的代理ip。
 <br/>
 这阵子在写一些爬虫，然后发现一个问题就是自己的ip经常被封锁，然后就上网找了一些ip代理，虽然可以解决我的需求，但是有很多免费的代理的ip都是比较烂的，毕竟一分钱一分货！所以就希望有一个自己的ip代理池，然后在GitHub上面也找到一些项目，但是毕竟不是自己的，自己的一些需求也不一样，所以就趁着国庆写一个啦！
 该项目主要三个方面：
@@ -24,7 +24,7 @@ pip install -r requirements.txt
 ```
 
 ## DB配置
-本项目为了最小使用化，使用的默认数据库是sqlite，然后为了数据库的拓展性，采用了sqlalchemy的ORM模型，这样就方便大家使用MySQL，MongoDB数据库等，而不需要改动代码。
+本项目为了最小使用化，使用的默认数据库是sqlite，然后为了数据库的拓展性，采用了sqlalchemy的ORM模型，这样就方便大家使用MySQL等数据库，而不需要改动代码。
 <br/>
 具体配置方法
 ```
@@ -40,9 +40,7 @@ pip install -r requirements.txt
 
     }
 ```
-sqlalchemy下的DB_CONNECT_STRING参考[支持数据库](http://docs.sqlalchemy.org/en/latest/core/engines.html#supported-databases)，理论上使用这种配置方式不只是适配MySQL，sqlalchemy支持的数据库都可以，但是仅仅测试过MySQL。
-<br/>
-* 有感兴趣的朋友，可以将Redis的实现方式添加进来。
+sqlalchemy下的DB_CONNECT_STRING参考[支持数据库](http://docs.sqlalchemy.org/en/latest/core/engines.html#supported-databases)，理论上使用这种配置方式不只是适配MySQL，sqlalchemy支持的数据库都可以。
 
 ## 如何使用
 将项目目录clone到当前文件夹 -> 切换工程目录 -> 运行脚本
@@ -66,7 +64,7 @@ python server.py  # api服务
 <br/>
 校验模块分两个，一个验证db数据，一个验证新抓取的数据。
 <br/>
-验证新抓取的采用了redis的阻塞式队列，保证爬虫模块尽量不会被阻塞！
+验证新抓取的采用了redis的阻塞式队列，尽量保证爬虫模块不会被阻塞！
 
 
 ## API 使用方法
@@ -84,7 +82,6 @@ GET /
 | protocol | int | 1http 2https 3http+https |
 | count | int | 数量(默认为1) |
 | country | int | 1 国内 2国外 |
-| area | str | 地区 |
 
 #### 例子
 ```
@@ -115,7 +112,7 @@ GET /delete
 - [ ] 评分模块（根据调用次数和服务次数定期评分）
 
 ## 特别说明
-- 本项目 爬虫文本分析\数据存储模块 借鉴[IPProxyPool](https://github.com/qiyeboy/IPProxyPool)项目
+- 本项目 爬虫文本分析\数据存储模块 借鉴[qiyeboy/IPProxyPool](https://github.com/qiyeboy/IPProxyPool)项目，十分感谢！
 
 ## 最后
 欢迎star或fork一起改进本项目！
