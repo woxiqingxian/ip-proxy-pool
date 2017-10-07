@@ -48,22 +48,6 @@ REDIS_CONFIG = {
 
 CRAWLER_WEB_LIST = [
     {
-        "url_list": ['http://www.66ip.cn/%s.html' % n for n in ['index'] + list(range(2, 12))],
-        "parser_config": {
-            'type': 'xpath',
-            'pattern': ".//*[@id='main']/div/div[1]/table/tr[position()>1]",
-            'position': {'ip': './td[1]', 'port': './td[2]'}
-        }
-    },
-    {
-        "url_list": ['http://www.66ip.cn/areaindex_%s/%s.html' % (m, n) for m in range(1, 35) for n in range(1, 10)],
-        "parser_config": {
-            'type': 'xpath',
-            'pattern': ".//*[@id='footer']/div/table/tr[position()>1]",
-            'position': {'ip': './td[1]', 'port': './td[2]'}
-        }
-    },
-    {
         "url_list": ['http://cn-proxy.com/', 'http://cn-proxy.com/archives/218'],
         "parser_config": {
             'type': 'xpath',
@@ -76,6 +60,22 @@ CRAWLER_WEB_LIST = [
         "parser_config": {
             'type': 'xpath',
             'pattern': ".//table[@class='list']/tr",
+            'position': {'ip': './td[1]', 'port': './td[2]'}
+        }
+    },
+    {
+        "url_list": ['http://www.66ip.cn/%s.html' % n for n in ['index'] + list(range(2, 12))],
+        "parser_config": {
+            'type': 'xpath',
+            'pattern': ".//*[@id='main']/div/div[1]/table/tr[position()>1]",
+            'position': {'ip': './td[1]', 'port': './td[2]'}
+        }
+    },
+    {
+        "url_list": ['http://www.66ip.cn/areaindex_%s/%s.html' % (m, n) for m in range(1, 35) for n in range(1, 10)],
+        "parser_config": {
+            'type': 'xpath',
+            'pattern': ".//*[@id='footer']/div/table/tr[position()>1]",
             'position': {'ip': './td[1]', 'port': './td[2]'}
         }
     },
