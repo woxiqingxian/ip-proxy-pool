@@ -106,6 +106,9 @@ def _validator_proxy(proxy_list, _type):
                 {'speed': proxy_info['speed'], 'types': proxy_info['types'], 'protocol': proxy_info['protocol']}
             )
         elif proxy_info and _type == "new":
+            result = sql_handler.select(count=1, conditions={"ip": ip, "port":port })
+            if result:
+                continue
             area = utils.get_address_from_ip(ip)
             new_params = {
                 'ip': ip,

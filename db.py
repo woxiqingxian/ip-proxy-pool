@@ -95,21 +95,17 @@ class SqlHandler(ISqlHandler):
         BaseModel.metadata.drop_all(self.engine)
 
     def insert(self, value):
-        try:
-            proxy = Proxy(
-                ip=value['ip'],
-                port=value['port'],
-                types=value['types'],
-                protocol=value['protocol'],
-                country=value['country'],
-                area=value['area'],
-                speed=value['speed']
-            )
-            self.session.add(proxy)
-            self.session.commit()
-        except Exception as e:
-            print e
-            pass
+        proxy = Proxy(
+            ip=value['ip'],
+            port=value['port'],
+            types=value['types'],
+            protocol=value['protocol'],
+            country=value['country'],
+            area=value['area'],
+            speed=value['speed']
+        )
+        self.session.add(proxy)
+        self.session.commit()
 
     def delete(self, conditions=None):
         if conditions:
