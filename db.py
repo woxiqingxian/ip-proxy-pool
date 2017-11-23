@@ -175,10 +175,12 @@ class SqlHandler(ISqlHandler):
                 query = query.filter(condition)
         if count:
             # return query.order_by(Proxy.use_times, Proxy.score.desc(), Proxy.speed).limit(count).all()
-            return query.order_by(Proxy.update_time.desc(), Proxy.speed, Proxy.use_times, Proxy.score.desc()).limit(count).all()
+            # return query.order_by(Proxy.update_time.desc(), Proxy.speed, Proxy.use_times, Proxy.score.desc()).limit(count).all()
+            return query.order_by(Proxy.update_time.desc(), Proxy.use_times, Proxy.speed, Proxy.score.desc()).limit(count).all()
         else:
             # return query.order_by(Proxy.use_times, Proxy.score.desc(), Proxy.speed).all()
-            return query.order_by(Proxy.update_time.desc(), Proxy.speed, Proxy.use_times, Proxy.score.desc()).all()
+            # return query.order_by(Proxy.update_time.desc(), Proxy.speed, Proxy.use_times, Proxy.score.desc()).all()
+            return query.order_by(Proxy.update_time.desc(), Proxy.use_times, Proxy.speed, Proxy.score.desc()).all()
         return
 
     def close(self):
